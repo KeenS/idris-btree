@@ -17,16 +17,6 @@ insert x (Node l v r) = if x < v
                         else Node l v (insert x r)
 
 export
-member: Ord a => a -> BTree a -> Bool
-member x Leaf = False
-member x (Node l v r) = case compare x v of
-  LT => member x l
-  EQ => True
-  GT => member x r
-
-
-
-export
 fold: (b -> a -> b -> b) -> b -> BTree a -> b
 fold f x Leaf = x
 fold f x (Node l v r) = f (fold f x l) v (fold f x r)
@@ -46,6 +36,13 @@ Foldable BTree where
     let l = foldl f init l in
     let v = f l v in
     foldl f v r
+
+
+
+export
+member: Ord a => a -> BTree a -> Bool
+member x = any (x ==)
+
 
 export
 toList: BTree a -> List a
