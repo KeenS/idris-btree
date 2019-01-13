@@ -1,0 +1,10 @@
+package btree
+
+sourcedir = src
+
+modules = BTree
+        , Tests.BTree
+
+tests = Tests.BTree.test
+
+pkgs = contrib
